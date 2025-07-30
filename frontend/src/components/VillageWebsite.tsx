@@ -667,12 +667,13 @@ const VillageWebsite = () => {
                                 Akses Lokasi
                             </div>
                             {[
-                                { label: "Danau Waren", url: "https://maps.app.goo.gl/xxxx1" },
-                                { label: "Kolam Renang Dito Hills", url: "https://maps.app.goo.gl/xxxx2" },
-                                { label: "Homestay", url: "https://maps.app.goo.gl/xxxx3" },
-                                { label: "Lapangan Desa", url: "https://maps.app.goo.gl/xxxx4" },
-                                { label: "Masjid Al Mu’minun", url: "https://maps.app.goo.gl/xxxx5" },
-                                { label: "Gereja St. Paulus", url: "https://maps.app.goo.gl/xxxx6" },
+                                { label: "Woma", url: "https://maps.app.goo.gl/xjfS6CCxFnfb8ggu7" },
+                                { label: "Vatlavav", url: "https://maps.app.goo.gl/xjfS6CCxFnfb8ggu7" },
+                                { label: "Panggung Pengukuhan Raja", url: "https://maps.app.goo.gl/xjfS6CCxFnfb8ggu7" },
+                                { label: "Pohon Beringin (Vavu Dit)", url: "https://maps.app.goo.gl/xjfS6CCxFnfb8ggu7" },
+                                { label: "Dermaga Penyebrangan", url: "https://maps.app.goo.gl/xjfS6CCxFnfb8ggu7" },
+                                { label: "Puskesmas Ngadi", url: "https://maps.app.goo.gl/xjfS6CCxFnfb8ggu7" },
+                                { label: "Masjid", url: "https://maps.app.goo.gl/4Emy7fjJhk4io5Xv7" },
                             ].map((item) => (
                                 <a
                                     key={item.label}
