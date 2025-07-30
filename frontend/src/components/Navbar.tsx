@@ -122,6 +122,7 @@ const Navbar = () => {
                                             <button
                                                 type="button"
                                                 className="px-5 py-2 border-b border-emerald-900 text-left hover:bg-emerald-50 focus:bg-emerald-100 transition"
+                                                onClick={() => window.open("https://ohoi-ngadi.id", "_blank")}
                                             >
                                                 <span className="text-emerald-900 text-sm font-medium">
                                                     Ohoi Ngadi
