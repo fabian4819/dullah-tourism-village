@@ -182,9 +182,9 @@ const ArticleDetailPage: React.FC = () => {
     return (
         <div className="min-h-screen bg-white flex flex-col relative overflow-hidden">
             {/* Decorative Background Lines */}
-            <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
+            {/* <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
                 <div className="w-[1285.43px] h-[679.83px] absolute left-[483.96px] top-[1892.99px] origin-top-left rotate-[-77.17deg] opacity-40 outline outline-1 outline-amber-300"></div>
-            </div>
+            </div> */}
 
             <Navbar />
             <main className={twMerge(

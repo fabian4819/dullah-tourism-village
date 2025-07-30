@@ -58,7 +58,7 @@ const FooterSection = () => {
                         </div>
                         <div>
                             <h3 className="text-white text-xl font-semibold font-['Montserrat'] mb-2">
-                                Desa Ngadi
+                                Desa Dullah
                             </h3>
                             <p className="text-white text-base font-normal font-['Albert_Sans'] mb-1">
                                 Pulau Dullah Utara, Kota Tual, Maluku, Indonesia
@@ -79,25 +79,34 @@ const FooterSection = () => {
                     >
                         <div>
                             <h4 className="text-white text-base font-bold font-['Montserrat'] mb-4">
-                                Pemerintah Desa Ngadi
+                                Pemerintah Desa Dullah
                             </h4>
                             <div className="space-y-3">
                                 <div className="flex items-center gap-4">
+                                    <div className="flex gap-1">
+                                        <Instagram className="w-6 h-6 text-white" />
+                                        <SiTiktok className="w-6 h-6 text-white" />
+                                    </div>
+                                    <span className="text-white text-lg font-semibold">
+                                        desa.dullah
+                                    </span>
+                                </div>
+                                <div className="flex items-center gap-4">
                                     <Facebook className="w-6 h-6 text-white" />
                                     <span className="text-white text-lg font-semibold">
-                                        Pemerintah Ohoi Dullah
+                                        Desa Dullah
                                     </span>
                                 </div>
                                 <div className="flex items-center gap-4">
                                     <Phone className="w-6 h-6 text-white" />
                                     <span className="text-white text-lg font-semibold">
-                                        (021) 1234-567
+                                        0813-1744-4435
                                     </span>
                                 </div>
                                 <div className="flex items-center gap-4">
                                     <Mail className="w-6 h-6 text-white" />
                                     <span className="text-white text-lg font-semibold">
-                                        ngadi@tualkota.go.id
+                                        desadullah@gmail.com
                                     </span>
                                 </div>
                             </div>
