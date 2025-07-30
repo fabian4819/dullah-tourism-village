@@ -486,7 +486,7 @@ const VillageWebsite = () => {
                     {[
                         {
                             img: "/images/pisang-embal.png",
-                            title: "Pisang Embal",
+                            title: "Pisang Enbal",
                             desc: "Pisang goreng khas Tual yang dibalut tepung embal singkong renyah, disajikan hangat dan nikmat dipadu sambal pedas",
                         },
                         {
@@ -496,7 +496,7 @@ const VillageWebsite = () => {
                         },
                         {
                             img: "/images/embal-love.png",
-                            title: "Embal Love",
+                            title: "Enbal Love",
                             desc: "Cemilan manis dari tepung singkong berbentuk hati, gurih dan tahan lama, cocok disemil saat santai bersama teh atau kopi",
                         },
                         {
