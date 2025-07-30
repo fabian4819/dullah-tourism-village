@@ -307,7 +307,7 @@ const ArticleDetailPage: React.FC = () => {
                 </div>
 
                 {/* Related Articles or Back to Articles Link */}
-                <div className={responsiveClass(
+                {/* <div className={responsiveClass(
                     "px-3 mt-16",
                     "px-6 mt-16",
                     "px-6 mt-16"
@@ -320,7 +320,7 @@ const ArticleDetailPage: React.FC = () => {
                             Lihat Artikel Lainnya
                         </button>
                     </div>
-                </div>
+                </div> */}
             </main>
             <FooterSection />
         </div>
