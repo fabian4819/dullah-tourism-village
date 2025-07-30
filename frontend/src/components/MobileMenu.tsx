@@ -42,6 +42,14 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
         >
           Artikel
         </Link>
+        {/* ADDED Galeri Adat Link */}
+        <Link
+          to="/galeri-adat"
+          className="block text-white text-lg font-medium font-['Montserrat'] py-2"
+          onClick={onClose}
+        >
+          Galeri Adat
+        </Link>
         <Link
           to="/tes-bmi"
           className="block text-white text-lg font-medium font-['Montserrat'] py-2"

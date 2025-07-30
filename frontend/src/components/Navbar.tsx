@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import MobileMenu from "./MobileMenu";
 import { useBreakpoint, getResponsiveValue } from "../hooks/useBreakpoint";
-import { Link } from 'react-router-dom'; // <--- ADD THIS IMPORT
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -78,13 +78,15 @@ const Navbar = () => {
                         )}
                     >
                         <div className="flex items-center gap-8 px-5 py-3 rounded-full border border-stone-900">
-                            {/* Changed to Link */}
                             <Link to="/" className="text-stone-900 text-sm font-medium">
                                 Beranda
                             </Link>
-                            {/* Changed to Link */}
                             <Link to="/artikel" className="text-stone-900 text-sm font-medium">
                                 Artikel
+                            </Link>
+                            {/* ADDED Galeri Adat Link */}
+                            <Link to="/galeri-adat" className="text-stone-900 text-sm font-medium">
+                                Galeri Adat
                             </Link>
                             <Link to="/tes-bmi" className="text-stone-900 text-sm font-medium">
                                 Tes BMI
@@ -118,7 +120,6 @@ const Navbar = () => {
                                     <div className="bg-white border-x border-b border-emerald-900 rounded-b-3xl overflow-hidden shadow-lg">
                                         <div className="flex flex-col">
                                             {/* Item: Ohoi Dullah */}
-                                            {/* You might want these to be links to sub-pages later, e.g., <Link to="/kenali-desa/dullah"> */}
                                             <button
                                                 type="button"
                                                 className="px-5 py-2 border-b border-emerald-900 text-left hover:bg-emerald-50 focus:bg-emerald-100 transition"
