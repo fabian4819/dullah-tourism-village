@@ -124,7 +124,7 @@ const Navbar = () => {
                                                 className="px-5 py-2 border-b border-emerald-900 text-left hover:bg-emerald-50 focus:bg-emerald-100 transition"
                                             >
                                                 <span className="text-emerald-900 text-sm font-medium">
-                                                    Ohoi Dullah
+                                                    Ohoi Ngadi
                                                 </span>
                                             </button>
                                             {/* Item: Ohoi Labetawi */}

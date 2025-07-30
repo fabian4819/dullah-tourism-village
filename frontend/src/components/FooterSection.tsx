@@ -85,7 +85,7 @@ const FooterSection = () => {
                                 <div className="flex items-center gap-4">
                                     <Facebook className="w-6 h-6 text-white" />
                                     <span className="text-white text-lg font-semibold">
-                                        Pemerintah Ohoi Ngadi
+                                        Pemerintah Ohoi Dullah
                                     </span>
                                 </div>
                                 <div className="flex items-center gap-4">
