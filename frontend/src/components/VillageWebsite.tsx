@@ -281,8 +281,8 @@ const VillageWebsite = () => {
                                 "w-full h-44 rounded-3xl" // desktop
                             )}
                         /> */}
-                        {/* Play icon: sebagian di luar gambar */}
-                        {/* <div
+                    {/* Play icon: sebagian di luar gambar */}
+                    {/* <div
                             className={responsiveClass(
                                 "absolute bottom-2 right-[-18px] w-12 h-12", // mobile
                                 "absolute bottom-4 right-[-22px] w-14 h-14", // tablet
@@ -380,18 +380,10 @@ const VillageWebsite = () => {
                                     "text-black text-2xl font-medium font-['Albert_Sans'] leading-relaxed" // desktop
                                 )}
                             >
-                                Selamat datang di Ohoi Dullah, desa wisata bahari di Tual, Maluku
-                                yang masuk{" "}
-                                <span className="font-bold">
-                                    45 besar Desa Wisata Nusantara 2024!
-                                </span>
-                                <br />
-                                <br />
-                                Di sini, kamu bisa duduk manis sambil nikmati Danau Waren yang
-                                tenang, jalan-jalan di pantai berpasir, dan merasakan budaya{" "}
-                                <span className="italic">katong</span> yang masih kental lewat
-                                musik, tarian, dan kuliner laut khas Kei.
-                            </p>
+                                Selamat datang di Desa Dullah, dimana adat masih hidup dan kekuasaan dipimpin langsung oleh Raja, pusat kekuasaan adat setempat.
+                                Di sini kamu bisa melihat langsung prosesi pengukuhan Raja Dullah, diselingi tarian tradisional seperti Cakalele, Toki Gaba‑gaba, dan Tari Sawat. 
+Bagi kamu yang tertarik dengan kebudayaan lokal yang autentik, Dullah bisa jadi pilihan utama!
+                                                            </p>
                         </div>
 
                         {/* <button
