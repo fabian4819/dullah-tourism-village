@@ -686,10 +686,10 @@ const VillageWebsite = () => {
                                 Akses Lokasi
                             </div>
                             {[
-                                { label: "Woma", url: "https://maps.app.goo.gl/xjfS6CCxFnfb8ggu7" },
+                                { label: "Woma", url: "https://maps.app.goo.gl/JvNqWmFKFj3BAwzG6" },
                                 { label: "Vatlavav", url: "https://maps.app.goo.gl/xjfS6CCxFnfb8ggu7" },
-                                { label: "Panggung Pengukuhan Raja", url: "https://maps.app.goo.gl/xjfS6CCxFnfb8ggu7" },
-                                { label: "Pohon Beringin (Vavu Dit)", url: "https://maps.app.goo.gl/xjfS6CCxFnfb8ggu7" },
+                                { label: "Panggung Pengukuhan Raja", url: "https://maps.app.goo.gl/fnsGu2PUWULXKJP66" },
+                                { label: "Pohon Beringin (Vavu Dit)", url: "https://maps.app.goo.gl/YxPWukpdkT15hDi79" },
                                 { label: "Dermaga Penyebrangan", url: "https://maps.app.goo.gl/xjfS6CCxFnfb8ggu7" },
                                 { label: "Puskesmas Ngadi", url: "https://maps.app.goo.gl/xjfS6CCxFnfb8ggu7" },
                                 { label: "Masjid", url: "https://maps.app.goo.gl/4Emy7fjJhk4io5Xv7" },
