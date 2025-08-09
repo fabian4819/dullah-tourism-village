@@ -381,17 +381,18 @@ const VillageWebsite = () => {
                                 )}
                             >
                                 Selamat datang di Ohoi Dullah, dimana adat masih hidup dan kekuasaan dipimpin langsung oleh Raja, pusat kekuasaan adat setempat.
-                                Di sini kamu bisa melihat langsung prosesi pengukuhan Raja Dullah, diselingi tarian tradisional seperti Cakalele, Toki Gaba‑gaba, dan Tari Sawat. 
-Bagi kamu yang tertarik dengan kebudayaan lokal yang autentik, Dullah bisa jadi pilihan utama!
-                                                            </p>
+                                Di sini kamu bisa melihat langsung prosesi pengukuhan Raja Dullah, diselingi tarian tradisional seperti Cakalele, Toki Gaba‑gaba, dan Tari Sawat.
+                                Bagi kamu yang tertarik dengan kebudayaan lokal yang autentik, Dullah bisa jadi pilihan utama!
+                            </p>
                         </div>
 
-                        {/* <button
+                        <button
                             className={responsiveClass(
                                 "flex items-center gap-2 px-4 py-2 bg-emerald-900 rounded-xl text-white text-xs font-semibold font-['Montserrat']", // mobile
                                 "flex items-center gap-2 px-6 py-3 bg-emerald-900 rounded-2xl text-white text-lg font-semibold font-['Montserrat']", // tablet
                                 "flex items-center gap-3 px-6 py-2 bg-emerald-900 rounded-3xl text-white text-xl font-semibold font-['Montserrat']" // desktop
                             )}
+                            onClick={() => setYoutubeUrl("https://drive.google.com/file/d/1uBksGXUROP-7rftikPkfZcLAiz1PsVuq/preview")}
                         >
                             <span>Lihat Podcast Suara <span className="italic">Katong</span></span>
                             <span
@@ -413,7 +414,7 @@ Bagi kamu yang tertarik dengan kebudayaan lokal yang autentik, Dullah bisa jadi 
                                     )}
                                 />
                             </span>
-                        </button> */}
+                        </button>
                     </div>
 
                     {/* Image Gallery */}
@@ -460,6 +461,32 @@ Bagi kamu yang tertarik dengan kebudayaan lokal yang autentik, Dullah bisa jadi 
                 </div>
             </section>
 
+            {youtubeUrl && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+                    <div className="bg-white rounded-2xl shadow-2xl p-4 relative max-w-2xl w-full">
+                        <button
+                            className="absolute top-2 right-4 text-emerald-900 text-3xl font-bold hover:text-red-500 transition"
+                            onClick={() => setYoutubeUrl(null)}
+                            aria-label="Tutup"
+                        >
+                            ×
+                        </button>
+                        <div className="aspect-video w-full rounded-xl overflow-hidden">
+                            <iframe
+                                width="100%"
+                                height="100%"
+                                src={youtubeUrl}
+                                title="Embedded Video"
+                                frameBorder="0"
+                                allow="autoplay; encrypted-media"
+                                allowFullScreen
+                                className="w-full h-full"
+                            ></iframe>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             {/* Food Gallery */}
             <section
                 className={responsiveClass(
@@ -482,7 +509,7 @@ Bagi kamu yang tertarik dengan kebudayaan lokal yang autentik, Dullah bisa jadi 
                             desc: "Pisang goreng khas Tual yang dibalut tepung embal singkong renyah, disajikan hangat dan nikmat dipadu sambal pedas",
                         },
                         {
-                            img: "/images/lad.jpeg",    
+                            img: "/images/lad.jpeg",
                             title: "Lad",
                             desc: "Salad anggur laut segar yang renyah dan menyegarkan, perpaduan rasa laut alami dengan kelapa parut, bawang merah, dan cabai khas Pulau Kei.",
                         },
