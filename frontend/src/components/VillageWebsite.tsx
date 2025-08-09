@@ -1,15 +1,11 @@
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
-import { Play } from "lucide-react"; // Only Play is directly used here now
-// Removed Phone, Mail, Instagram, Facebook, Youtube as they are in FooterSection
-// Removed ChevronDown, ChevronUp as they are in Navbar
+import { Play } from "lucide-react";
 import { Icon } from '@iconify/react';
 
-// Import the new components
 import Navbar from "./Navbar";
 import FooterSection from "./FooterSection";
 
-// Keep these components as they are not extracted from the main file, but used by it
 import OrganizationChart from "./OrganizationChart";
 import ArticleSection from "./ArticleSection";
 import InfoSection from "./InfoSection";
@@ -17,14 +13,10 @@ import InfoSection from "./InfoSection";
 import { useBreakpoint, getResponsiveValue } from "../hooks/useBreakpoint";
 
 const VillageWebsite = () => {
-    // The state for mobile menu and dropdown is now managed within Navbar,
-    // so we don't need isMobileMenuOpen, isOpen, toggleDropdown here anymore.
     const [youtubeUrl, setYoutubeUrl] = useState<string | null>(null);
-    const [showMapModal, setShowMapModal] = useState(false); // New state for map modal
+    const [showMapModal, setShowMapModal] = useState(false);
+    const currentBreakpoint = useBreakpoint();
 
-    const currentBreakpoint = useBreakpoint(); // Get the current breakpoint
-
-    // Utility function for responsive classes
     const responsiveClass = (
         mobile: string,
         tablet?: string,
@@ -46,9 +38,9 @@ const VillageWebsite = () => {
             {/* Hero Section */}
             <section
                 className={responsiveClass(
-                    "flex flex-col items-center gap-6 px-3", // mobile
-                    "flex flex-col items-center gap-8 px-5", // tablet
-                    "flex flex-col items-center gap-10" // desktop
+                    "flex flex-col items-center gap-6 px-3",
+                    "flex flex-col items-center gap-8 px-5",
+                    "flex flex-col items-center gap-10"
                 )}
             >
                 {/* Decorative Elements */}
@@ -56,9 +48,9 @@ const VillageWebsite = () => {
                     {/* Mobile Decorative Asset: di atas title */}
                     <div
                         className={responsiveClass(
-                            "block w-full flex justify-center mb-2", // mobile: tampil di atas title, tidak absolute
-                            "hidden", // tablet
-                            "hidden"  // desktop
+                            "block w-full flex justify-center mb-2",
+                            "hidden",
+                            "hidden"
                         )}
                     >
                         <img
@@ -72,9 +64,9 @@ const VillageWebsite = () => {
                         {/* Left Asset */}
                         <div
                             className={responsiveClass(
-                                "hidden", // mobile
-                                "block absolute left-0 top-1/2 -translate-y-1/2", // tablet
-                                "block absolute left-0 top-1/2 -translate-y-1/2" // desktop
+                                "hidden",
+                                "block absolute left-0 top-1/2 -translate-y-1/2",
+                                "block absolute left-0 top-1/2 -translate-y-1/2"
                             )}
                             style={{ zIndex: 1 }}
                         >
@@ -82,9 +74,9 @@ const VillageWebsite = () => {
                                 src="/images/left-main-asset.png"
                                 alt="Left Asset"
                                 className={responsiveClass(
-                                    "hidden", // mobile
-                                    "w-20 h-auto", // tablet
-                                    "w-[300px] h-auto" // desktop
+                                    "hidden",
+                                    "w-20 h-auto",
+                                    "w-[300px] h-auto"
                                 )}
                             />
                         </div>
@@ -92,9 +84,9 @@ const VillageWebsite = () => {
                         {/* Title */}
                         <h1
                             className={responsiveClass(
-                                "text-emerald-900 text-7xl font-semibold font-['Vivaldi'] text-center", // mobile
-                                "text-emerald-900 text-8xl font-semibold font-['Vivaldi'] text-center", // tablet
-                                "text-emerald-900 text-9xl font-semibold font-['Vivaldi'] text-center" // desktop
+                                "text-emerald-900 text-7xl font-semibold font-['Vivaldi'] text-center",
+                                "text-emerald-900 text-8xl font-semibold font-['Vivaldi'] text-center",
+                                "text-emerald-900 text-9xl font-semibold font-['Vivaldi'] text-center"
                             )}
                             style={{ zIndex: 2 }}
                         >
@@ -104,9 +96,9 @@ const VillageWebsite = () => {
                         {/* Right Asset */}
                         <div
                             className={responsiveClass(
-                                "hidden", // mobile
-                                "block absolute right-0 top-1/2 -translate-y-1/2", // tablet
-                                "block absolute right-0 top-1/2 -translate-y-1/2" // desktop
+                                "hidden",
+                                "block absolute right-0 top-1/2 -translate-y-1/2",
+                                "block absolute right-0 top-1/2 -translate-y-1/2"
                             )}
                             style={{ zIndex: 1 }}
                         >
@@ -114,9 +106,9 @@ const VillageWebsite = () => {
                                 src="/images/right-main-asset.png"
                                 alt="Right Asset"
                                 className={responsiveClass(
-                                    "hidden", // mobile
-                                    "w-20 h-auto", // tablet
-                                    "w-[300px] h-auto" // desktop
+                                    "hidden",
+                                    "w-20 h-auto",
+                                    "w-[300px] h-auto"
                                 )}
                             />
                         </div>
@@ -126,7 +118,7 @@ const VillageWebsite = () => {
                 {/* Hero Video */}
                 <div
                     className={responsiveClass(
-                        "w-full px-2 md:px-8 lg:px-20 box-border", // mobile
+                        "w-full px-2 md:px-8 lg:px-20 box-border",
                         "w-full px-8 box-border",
                         "w-full px-10 box-border"
                     )}
@@ -139,46 +131,31 @@ const VillageWebsite = () => {
                             playsInline
                             className="w-full h-full object-cover"
                         />
-                        {/* SVG efek pojok kanan bawah */}
-                        {/* <div className="absolute bottom-0 right-0" style={{ width: 250, height: 250, pointerEvents: "none" }}>
-                            <svg width="250" height="250" viewBox="0 0 250 250" fill="none">
-                                <path
-                                    d="
-                        M250,250
-                        L250,125
-                        A125,125 0 0 0 125,250
-                        Z
-                    "
-                                    fill="white"
-                                />
-                            </svg>
-                        </div> */}
-                        {/* Play Icon Button */}
                         <button
                             className={responsiveClass(
-                                "absolute bottom-4 right-4 z-20 group focus:outline-none", // mobile
-                                "absolute bottom-6 right-6 z-20 group focus:outline-none", // tablet
-                                "absolute bottom-8 right-8 z-20 group focus:outline-none"  // desktop
+                                "absolute bottom-4 right-4 z-20 group focus:outline-none",
+                                "absolute bottom-6 right-6 z-20 group focus:outline-none",
+                                "absolute bottom-8 right-8 z-20 group focus:outline-none"
                             )}
                             style={{ transition: "transform 0.2s" }}
                             onClick={() => setYoutubeUrl("https://www.youtube.com/embed/hAEFpdjNLtU?autoplay=1")}
                             aria-label="Tonton video profil Ohoi Dullah"
                         >
                             <span className={responsiveClass(
-                                "inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-900 border-4 border-white shadow-xl group-hover:scale-110 transition-transform duration-200", // mobile
-                                "inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-900 border-4 border-white shadow-xl group-hover:scale-110 transition-transform duration-200", // tablet
-                                "inline-flex items-center justify-center w-24 h-24 rounded-full bg-emerald-900 border-4 border-white shadow-xl group-hover:scale-110 transition-transform duration-200" // desktop
+                                "inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-900 border-4 border-white shadow-xl group-hover:scale-110 transition-transform duration-200",
+                                "inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-900 border-4 border-white shadow-xl group-hover:scale-110 transition-transform duration-200",
+                                "inline-flex items-center justify-center w-24 h-24 rounded-full bg-emerald-900 border-4 border-white shadow-xl group-hover:scale-110 transition-transform duration-200"
                             )}>
                                 <Play className={responsiveClass(
-                                    "w-5 h-5 text-white group-hover:scale-110 transition-transform duration-200", // mobile
-                                    "w-8 h-8 text-white group-hover:scale-110 transition-transform duration-200", // tablet
-                                    "w-10 h-10y text-white group-hover:scale-110 transition-transform duration-200" // desktop
+                                    "w-5 h-5 text-white group-hover:scale-110 transition-transform duration-200",
+                                    "w-8 h-8 text-white group-hover:scale-110 transition-transform duration-200",
+                                    "w-10 h-10y text-white group-hover:scale-110 transition-transform duration-200"
                                 )} />
                             </span>
                             <span className={responsiveClass(
-                                "absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white text-emerald-900 text-xs font-semibold px-3 py-1 rounded-full shadow opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none", // mobile
-                                "absolute left-1/2 top-full mt-3 -translate-x-1/2 bg-white text-emerald-900 text-sm font-semibold px-4 py-2 rounded-full shadow opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none", // tablet
-                                "absolute left-1/2 top-full mt-4 -translate-x-1/2 bg-white text-emerald-900 text-base font-semibold px-5 py-2 rounded-full shadow opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none" // desktop
+                                "absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white text-emerald-900 text-xs font-semibold px-3 py-1 rounded-full shadow opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none",
+                                "absolute left-1/2 top-full mt-3 -translate-x-1/2 bg-white text-emerald-900 text-sm font-semibold px-4 py-2 rounded-full shadow opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none",
+                                "absolute left-1/2 top-full mt-4 -translate-x-1/2 bg-white text-emerald-900 text-base font-semibold px-5 py-2 rounded-full shadow opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"
                             )}>
                                 Tonton Video
                             </span>
@@ -216,37 +193,37 @@ const VillageWebsite = () => {
             {/* Culture Section */}
             <section
                 className={responsiveClass(
-                    "px-3 py-8", // mobile
-                    "px-5 py-12", // tablet
-                    "px-12 py-16" // desktop
+                    "px-3 py-8",
+                    "px-5 py-12",
+                    "px-12 py-16"
                 )}
             >
                 <div
                     className={responsiveClass(
-                        "flex flex-col gap-6", // mobile
-                        "flex flex-col gap-8 lg:flex-row lg:items-center", // tablet
-                        "flex flex-row items-center gap-60" // desktop
+                        "flex flex-col gap-6",
+                        "flex flex-col gap-8 lg:flex-row lg:items-center",
+                        "flex flex-row items-center gap-60"
                     )}
                 >
                     <div
                         className={responsiveClass(
-                            "flex-1", // mobile
-                            "flex-1", // tablet
-                            "flex-1" // desktop
+                            "flex-1",
+                            "flex-1",
+                            "flex-1"
                         )}
                     >
                         <div
                             className={responsiveClass(
-                                "mb-3", // mobile
-                                "mb-4", // tablet
-                                "mb-2" // desktop
+                                "mb-3",
+                                "mb-4",
+                                "mb-2"
                             )}
                         >
                             <h2
                                 className={responsiveClass(
-                                    "text-emerald-900 text-2xl font-bold font-['Montserrat']", // mobile
-                                    "text-emerald-900 text-2xl font-bold font-['Montserrat']", // tablet
-                                    "text-emerald-900 text-4xl font-bold font-['Montserrat']" // desktop
+                                    "text-emerald-900 text-2xl font-bold font-['Montserrat']",
+                                    "text-emerald-900 text-2xl font-bold font-['Montserrat']",
+                                    "text-emerald-900 text-4xl font-bold font-['Montserrat']"
                                 )}
                             >
                                 Mengenal Budaya <span className="italic">Katong</span>
@@ -254,9 +231,9 @@ const VillageWebsite = () => {
                         </div>
                         <p
                             className={responsiveClass(
-                                "text-black text-lg font-medium font-['Albert_Sans'] leading-tight", // mobile
-                                "text-black text-lg font-medium font-['Albert_Sans'] leading-relaxed", // tablet
-                                "text-black text-2xl font-medium font-['Albert_Sans'] leading-relaxed" // desktop
+                                "text-black text-lg font-medium font-['Albert_Sans'] leading-tight",
+                                "text-black text-lg font-medium font-['Albert_Sans'] leading-relaxed",
+                                "text-black text-2xl font-medium font-['Albert_Sans'] leading-relaxed"
                             )}
                         >
                             Tual bukan hanya soal keindahan lautnya, tapi juga tentang cerita,
@@ -264,38 +241,6 @@ const VillageWebsite = () => {
                             masyarakatnya
                         </p>
                     </div>
-
-                    {/* <div
-                        className={responsiveClass(
-                            "w-full relative ml-0", // mobile
-                            "w-64 relative ml-8", // tablet
-                            "w-80 relative ml-16" // desktop
-                        )}
-                    >
-                        <img
-                            src="/images/image-template.png"
-                            alt="Cultural activity"
-                            className={responsiveClass(
-                                "w-full h-32 rounded-3xl", // mobile
-                                "w-full h-36 rounded-3xl", // tablet
-                                "w-full h-44 rounded-3xl" // desktop
-                            )}
-                        /> */}
-                    {/* Play icon: sebagian di luar gambar */}
-                    {/* <div
-                            className={responsiveClass(
-                                "absolute bottom-2 right-[-18px] w-12 h-12", // mobile
-                                "absolute bottom-4 right-[-22px] w-14 h-14", // tablet
-                                "absolute bottom-6 right-[-28px] w-16 h-16" // desktop
-                            )}
-                            style={{ zIndex: 2, cursor: "pointer" }}
-                            onClick={() => setYoutubeUrl("https://www.youtube.com/embed/VuRw_Pv2_Go?autoplay=1")}
-                        >
-                            <div className="w-full h-full bg-emerald-900 rounded-full border-4 border-white flex items-center justify-center shadow-lg">
-                                <Play className={responsiveClass("w-6 h-6", "w-7 h-7", "w-8 h-8") + " text-white"} />
-                            </div>
-                        </div>
-                    </div> */}
                 </div>
             </section>
 
@@ -328,37 +273,37 @@ const VillageWebsite = () => {
             {/* Welcome Section */}
             <section
                 className={responsiveClass(
-                    "px-3 py-8", // mobile
-                    "px-5 py-12", // tablet
-                    "px-12 py-16" // desktop
+                    "px-3 py-8",
+                    "px-5 py-12",
+                    "px-12 py-16"
                 )}
             >
                 <div
                     className={responsiveClass(
-                        "flex flex-col gap-6", // mobile
-                        "flex flex-col gap-8 lg:flex-row lg:justify-between", // tablet
-                        "flex flex-row justify-between items-start gap-32" // desktop
+                        "flex flex-col gap-6",
+                        "flex flex-col gap-8 lg:flex-row lg:justify-between",
+                        "flex flex-row justify-between items-start gap-32"
                     )}
                 >
                     <div
                         className={responsiveClass(
-                            "flex-1", // mobile
-                            "flex-1", // tablet
-                            "flex-1 max-w-3xl" // desktop
+                            "flex-1",
+                            "flex-1",
+                            "flex-1 max-w-3xl"
                         )}
                     >
                         <div
                             className={responsiveClass(
-                                "mb-4", // mobile
-                                "mb-6", // tablet
-                                "mb-8" // desktop
+                                "mb-4",
+                                "mb-6",
+                                "mb-8"
                             )}
                         >
                             <h2
                                 className={responsiveClass(
-                                    "text-emerald-900 text-5xl font-medium", // mobile
-                                    "text-emerald-900 text-6xl font-medium", // tablet
-                                    "text-emerald-900 text-9xl font-medium" // desktop
+                                    "text-emerald-900 text-5xl font-medium",
+                                    "text-emerald-900 text-6xl font-medium",
+                                    "text-emerald-900 text-9xl font-medium"
                                 )}
                             >
                                 <span className="font-['Cormorant'] italic">T</span>
@@ -368,16 +313,16 @@ const VillageWebsite = () => {
 
                         <div
                             className={responsiveClass(
-                                "mb-4", // mobile
-                                "mb-6", // tablet
-                                "mb-8" // desktop
+                                "mb-4",
+                                "mb-6",
+                                "mb-8"
                             )}
                         >
                             <p
                                 className={responsiveClass(
-                                    "text-black text-sm font-medium font-['Albert_Sans'] leading-tight", // mobile
-                                    "text-black text-lg font-medium font-['Albert_Sans'] leading-relaxed", // tablet
-                                    "text-black text-2xl font-medium font-['Albert_Sans'] leading-relaxed" // desktop
+                                    "text-black text-sm font-medium font-['Albert_Sans'] leading-tight",
+                                    "text-black text-lg font-medium font-['Albert_Sans'] leading-relaxed",
+                                    "text-black text-2xl font-medium font-['Albert_Sans'] leading-relaxed"
                                 )}
                             >
                                 Selamat datang di Ohoi Dullah, dimana adat masih hidup dan kekuasaan dipimpin langsung oleh Raja, pusat kekuasaan adat setempat.
@@ -387,19 +332,22 @@ const VillageWebsite = () => {
                         </div>
 
                         <button
-                            className={responsiveClass(
-                                "flex items-center gap-2 px-4 py-2 bg-emerald-900 rounded-xl text-white text-xs font-semibold font-['Montserrat']", // mobile
-                                "flex items-center gap-2 px-6 py-3 bg-emerald-900 rounded-2xl text-white text-lg font-semibold font-['Montserrat']", // tablet
-                                "flex items-center gap-3 px-6 py-2 bg-emerald-900 rounded-3xl text-white text-xl font-semibold font-['Montserrat']" // desktop
+                            className={twMerge(
+                                responsiveClass(
+                                    "flex items-center gap-2 px-4 py-2 bg-emerald-900 rounded-xl text-white text-xs font-semibold font-['Montserrat']",
+                                    "flex items-center gap-2 px-6 py-3 bg-emerald-900 rounded-2xl text-white text-lg font-semibold font-['Montserrat']",
+                                    "flex items-center gap-3 px-6 py-2 bg-emerald-900 rounded-3xl text-white text-xl font-semibold font-['Montserrat']"
+                                ),
+                                "transition-colors duration-300 hover:bg-emerald-700 hover:shadow-lg"
                             )}
                             onClick={() => setYoutubeUrl("https://drive.google.com/file/d/1uBksGXUROP-7rftikPkfZcLAiz1PsVuq/preview")}
                         >
                             <span>Lihat Podcast Suara <span className="italic">Katong</span></span>
                             <span
                                 className={responsiveClass(
-                                    "inline-flex items-center justify-center rounded-full border-2 border-white bg-emerald-900", // mobile
-                                    "inline-flex items-center justify-center rounded-full border-2 border-white bg-emerald-900", // tablet
-                                    "inline-flex items-center justify-center rounded-full border-2 border-white bg-emerald-900" // desktop
+                                    "inline-flex items-center justify-center rounded-full border-2 border-white bg-emerald-900",
+                                    "inline-flex items-center justify-center rounded-full border-2 border-white bg-emerald-900",
+                                    "inline-flex items-center justify-center rounded-full border-2 border-white bg-emerald-900"
                                 )}
                                 style={{
                                     width: getResponsiveValue({ mobile: 28, tablet: 36, desktop: 30 }, currentBreakpoint),
@@ -408,9 +356,9 @@ const VillageWebsite = () => {
                             >
                                 <Play
                                     className={responsiveClass(
-                                        "w-4 h-4", // mobile
-                                        "w-5 h-5", // tablet
-                                        "w-4 h-4" // desktop
+                                        "w-4 h-4",
+                                        "w-5 h-5",
+                                        "w-4 h-4"
                                     )}
                                 />
                             </span>
@@ -420,20 +368,20 @@ const VillageWebsite = () => {
                     {/* Image Gallery */}
                     <div
                         className={responsiveClass(
-                            "flex items-center justify-center gap-2", // mobile
-                            "flex items-center justify-center gap-3", // tablet
-                            "flex items-center justify-center gap-4 mt-20" // desktop
+                            "flex items-center justify-center gap-2",
+                            "flex items-center justify-center gap-3",
+                            "flex items-center justify-center gap-4 mt-20"
                         )}
                     >
                         {/* Center image (tabema-1) */}
                         <img
                             src="/images/tabema-1.png"
                             alt="Village life 1"
-                            className={responsiveClass(
-                                "w-24 h-32 rounded-lg object-cover", // mobile
-                                "w-32 rounded-xl object-cover", // tablet
-                                "w-60 rounded-2xl object-cover" // desktop
-                            )}
+                            className={twMerge(responsiveClass(
+                                "w-24 h-32 rounded-lg object-cover",
+                                "w-32 rounded-xl object-cover",
+                                "w-60 rounded-2xl object-cover"
+                            ), "transition-transform duration-300 hover:scale-105")}
                             style={{ zIndex: 2 }}
                         />
                         {/* Right column: tabema-2 (top), tabema-3 (bottom) */}
@@ -441,20 +389,20 @@ const VillageWebsite = () => {
                             <img
                                 src="/images/tabema-2.png"
                                 alt="Village life 2"
-                                className={responsiveClass(
-                                    "w-24 h-20 rounded-lg object-cover translate-y-[-20%]", // mobile
-                                    "w-32 h-24 rounded-xl object-cover translate-y-[-24%]", // tablet
-                                    "w-60 rounded-2xl object-cover translate-y-[-10%]" // desktop
-                                )}
+                                className={twMerge(responsiveClass(
+                                    "w-24 h-20 rounded-lg object-cover translate-y-[-20%]",
+                                    "w-32 h-24 rounded-xl object-cover translate-y-[-24%]",
+                                    "w-60 rounded-2xl object-cover translate-y-[-10%]"
+                                ), "transition-transform duration-300 hover:scale-105")}
                             />
                             <img
                                 src="/images/tabema-3.png"
                                 alt="Village life 3"
-                                className={responsiveClass(
-                                    "w-24 h-20 rounded-lg object-cover translate-y-[20%]", // mobile
-                                    "w-32 h-24 rounded-xl object-cover translate-y-[24%]", // tablet
-                                    "w-60 rounded-2xl object-cover translate-y-[10%]" // desktop
-                                )}
+                                className={twMerge(responsiveClass(
+                                    "w-24 h-20 rounded-lg object-cover translate-y-[20%]",
+                                    "w-32 h-24 rounded-xl object-cover translate-y-[24%]",
+                                    "w-60 rounded-2xl object-cover translate-y-[10%]"
+                                ), "transition-transform duration-300 hover:scale-105")}
                             />
                         </div>
                     </div>
@@ -490,16 +438,16 @@ const VillageWebsite = () => {
             {/* Food Gallery */}
             <section
                 className={responsiveClass(
-                    "px-3 py-8", // mobile
-                    "px-5 py-12", // tablet
-                    "px-6 py-16" // desktop
+                    "px-3 py-8",
+                    "px-5 py-12",
+                    "px-6 py-16"
                 )}
             >
                 <div
                     className={responsiveClass(
-                        "flex gap-2 overflow-x-auto", // mobile
-                        "flex gap-3 overflow-x-auto", // tablet
-                        "flex gap-6 overflow-x-auto" // desktop
+                        "flex gap-2 overflow-x-auto",
+                        "flex gap-3 overflow-x-auto",
+                        "flex gap-6 overflow-x-auto"
                     )}
                 >
                     {[
@@ -533,9 +481,9 @@ const VillageWebsite = () => {
                             key={food.title}
                             className={
                                 responsiveClass(
-                                    "relative w-24 h-28 rounded-xl flex-shrink-0 group transition-all duration-300 hover:scale-105", // mobile: Hover scale
-                                    "relative w-32 h-36 rounded-2xl flex-shrink-0 group transition-all duration-300 hover:scale-110", // tablet: Hover scale
-                                    "relative w-64 h-72 rounded-3xl group transition-all duration-300 hover:scale-115" // desktop: Hover scale
+                                    "relative w-24 h-28 rounded-xl flex-shrink-0 group transition-all duration-300 hover:scale-105",
+                                    "relative w-32 h-36 rounded-2xl flex-shrink-0 group transition-all duration-300 hover:scale-110",
+                                    "relative w-64 h-72 rounded-3xl group transition-all duration-300 hover:scale-115"
                                 )
                             }
                         >
@@ -554,27 +502,27 @@ const VillageWebsite = () => {
                             <div
                                 className={
                                     responsiveClass(
-                                        "absolute inset-0 bg-gradient-to-b from-black/0 via-black/60 to-emerald-900 rounded-xl flex flex-col justify-end items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300", // mobile
-                                        "absolute inset-0 bg-gradient-to-b from-black/0 via-black/60 to-emerald-900 rounded-2xl flex flex-col justify-end items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300", // tablet
-                                        "absolute inset-0 bg-gradient-to-b from-black/0 via-black/60 to-emerald-900 rounded-3xl flex flex-col justify-end items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300" // desktop
+                                        "absolute inset-0 bg-gradient-to-b from-black/0 via-black/60 to-emerald-900 rounded-xl flex flex-col justify-end items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300",
+                                        "absolute inset-0 bg-gradient-to-b from-black/0 via-black/60 to-emerald-900 rounded-2xl flex flex-col justify-end items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300",
+                                        "absolute inset-0 bg-gradient-to-b from-black/0 via-black/60 to-emerald-900 rounded-3xl flex flex-col justify-end items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                                     )
                                 }
                                 style={{ padding: "1rem" }}
                             >
                                 <h3
                                     className={responsiveClass(
-                                        "text-white text-lg font-bold font-['Montserrat'] mb-1 text-left w-full", // mobile
-                                        "text-white text-xl font-bold font-['Montserrat'] mb-2 text-left w-full", // tablet
-                                        "text-white text-2xl font-bold font-['Montserrat'] mb-2 text-left w-full" // desktop
+                                        "text-white text-lg font-bold font-['Montserrat'] mb-1 text-left w-full",
+                                        "text-white text-xl font-bold font-['Montserrat'] mb-2 text-left w-full",
+                                        "text-white text-2xl font-bold font-['Montserrat'] mb-2 text-left w-full"
                                     )}
                                 >
                                     {food.title}
                                 </h3>
                                 <p
                                     className={responsiveClass(
-                                        "text-white text-xs font-normal font-['Albert_Sans'] leading-tight text-left w-full", // mobile
-                                        "text-white text-sm font-normal font-['Albert_Sans'] leading-relaxed text-left w-full", // tablet
-                                        "text-white text-base font-normal font-['Albert_Sans'] leading-relaxed text-left w-full" // desktop
+                                        "text-white text-xs font-normal font-['Albert_Sans'] leading-tight text-left w-full",
+                                        "text-white text-sm font-normal font-['Albert_Sans'] leading-relaxed text-left w-full",
+                                        "text-white text-base font-normal font-['Albert_Sans'] leading-relaxed text-left w-full"
                                     )}
                                 >
                                     {food.desc}
@@ -588,39 +536,39 @@ const VillageWebsite = () => {
             {/* Map Section */}
             <section
                 className={responsiveClass(
-                    "px-3 py-8 relative", // mobile
-                    "px-5 py-12 relative", // tablet
-                    "px-12 py-16 relative" // desktop
+                    "px-3 py-8 relative",
+                    "px-5 py-12 relative",
+                    "px-12 py-16 relative"
                 )}
             >
                 <div
                     className={responsiveClass(
-                        "flex flex-col gap-4", // mobile
-                        "flex flex-col gap-6", // tablet
-                        "flex flex-row gap-12" // desktop
+                        "flex flex-col gap-4",
+                        "flex flex-col gap-6",
+                        "flex flex-row gap-12"
                     )}
                 >
                     <div
                         className={responsiveClass(
-                            "flex-1", // mobile
-                            "flex-1", // tablet
-                            "flex-1" // desktop
+                            "flex-1",
+                            "flex-1",
+                            "flex-1"
                         )}
                     >
                         <h2
                             className={responsiveClass(
-                                "text-emerald-900 text-lg font-bold font-['Montserrat'] mb-2", // mobile
-                                "text-emerald-900 text-2xl font-bold font-['Montserrat'] mb-3", // tablet
-                                "text-emerald-900 text-4xl font-bold font-['Montserrat'] mb-4" // desktop
+                                "text-emerald-900 text-lg font-bold font-['Montserrat'] mb-2",
+                                "text-emerald-900 text-2xl font-bold font-['Montserrat'] mb-3",
+                                "text-emerald-900 text-4xl font-bold font-['Montserrat'] mb-4"
                             )}
                         >
                             Jelajahi Keindahan Ohoi Dullah
                         </h2>
                         <p
                             className={responsiveClass(
-                                "text-black text-sm font-normal font-['Albert_Sans'] leading-tight", // mobile
-                                "text-black text-lg font-normal font-['Albert_Sans'] leading-relaxed", // tablet
-                                "text-black text-3xl font-normal font-['Albert_Sans'] leading-relaxed" // desktop
+                                "text-black text-sm font-normal font-['Albert_Sans'] leading-tight",
+                                "text-black text-lg font-normal font-['Albert_Sans'] leading-relaxed",
+                                "text-black text-3xl font-normal font-['Albert_Sans'] leading-relaxed"
                             )}
                         >
                             Akses lokasi, rute terbaik, dan fasilitas umum tersedia di sini
@@ -635,9 +583,9 @@ const VillageWebsite = () => {
                     {/* Addition Asset (z-0, paling belakang) */}
                     <div
                         className={responsiveClass(
-                            "hidden", // mobile
-                            "block",  // tablet
-                            "block"   // desktop
+                            "hidden",
+                            "block",
+                            "block"
                         )}
                         style={{
                             zIndex: 0,
@@ -651,36 +599,36 @@ const VillageWebsite = () => {
                             src="/images/addition-asset.png"
                             alt="Additional Asset"
                             className={responsiveClass(
-                                "w-20 h-auto", // mobile
-                                "w-24 h-auto", // tablet
-                                "w-56 h-auto"  // desktop
+                                "w-20 h-auto",
+                                "w-24 h-auto",
+                                "w-56 h-auto"
                             )}
                         />
                     </div>
                     {/* Konten utama (map & lokasi) di depan asset */}
                     <div
                         className={responsiveClass(
-                            "w-full flex flex-col mt-10 gap-4 relative z-10", // mobile
-                            "w-full flex flex-row mt-10 gap-8 relative z-10", // tablet
-                            "w-full flex flex-row mt-10 gap-12 relative z-10" // desktop
+                            "w-full flex flex-col mt-10 gap-4 relative z-10",
+                            "w-full flex flex-row mt-10 gap-8 relative z-10",
+                            "w-full flex flex-row mt-10 gap-12 relative z-10"
                         )}
                     >
                         {/* Map Image */}
                         <img
-                            className={responsiveClass(
-                                "w-full h-[260px] object-cover", // mobile
-                                "w-[737px] h-[400px] object-cover", // tablet
-                                "w-[60vw] object-cover" // desktop
-                            )}
+                            className={twMerge(responsiveClass(
+                                "w-full h-[260px] object-cover",
+                                "w-[737px] h-[400px] object-cover",
+                                "w-[60vw] object-cover"
+                            ), "transition-transform duration-300 hover:scale-105")}
                             src="/images/map-full.png"
                             alt="Peta Ohoi Dullah"
                             draggable={false}
                         />
                         {/* Location List */}
                         <div className={responsiveClass(
-                            "w-full flex flex-col gap-2 mt-4", // mobile
-                            "w-[30vw] flex flex-col gap-2 mt-0", // tablet
-                            "w-[30vw] flex flex-col gap-4 mt-0" // desktop
+                            "w-full flex flex-col gap-2 mt-4",
+                            "w-[30vw] flex flex-col gap-2 mt-0",
+                            "w-[30vw] flex flex-col gap-4 mt-0"
                         )}>
                             <div className="text-emerald-900 text-4xl font-bold font-['Montserrat'] mb-2">
                                 Akses Lokasi
@@ -699,7 +647,7 @@ const VillageWebsite = () => {
                                     href={item.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="self-stretch px-3.5 py-[5px] bg-emerald-900 rounded-[10px] flex justify-between items-center hover:bg-emerald-800 transition"
+                                    className="self-stretch px-3.5 py-[5px] bg-emerald-900 rounded-[10px] flex justify-between items-center transition duration-200 hover:bg-emerald-800 hover:shadow-md"
                                     style={{ boxShadow: "0 2px 8px 0 rgba(20,83,45,0.08)" }}
                                 >
                                     <div className="text-white text-2xl md:text-3xl font-medium font-['Albert_Sans']">
@@ -733,7 +681,6 @@ const VillageWebsite = () => {
                                         rel="noopener noreferrer"
                                         className="flex items-center"
                                     >
-                                        {/* Ganti img dengan icon location */}
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             className="w-10 h-10 text-emerald-900"
@@ -751,11 +698,11 @@ const VillageWebsite = () => {
                                     </a>
                                 </div>
                                 <button
-                                    className="w-6 h-6 bg-emerald-900 text-white flex items-center justify-center text-xl font-bold rounded"
+                                    className="w-6 h-6 bg-emerald-900 text-white flex items-center justify-center text-xl font-bold rounded hover:bg-red-500 transition-colors duration-200"
                                     onClick={() => setShowMapModal(false)}
                                     aria-label="Tutup"
                                 >
-                                    &times;
+                                    ×
                                 </button>
                             </div>
                         </div>
@@ -768,9 +715,9 @@ const VillageWebsite = () => {
             <div className="relative">
                 <OrganizationChart
                     className={responsiveClass(
-                        "px-3 py-8 ml-0", // mobile
-                        "px-5 py-12 ml-12", // tablet
-                        "px-12 py-16 ml-8 mr-8" // desktop
+                        "px-3 py-8 ml-0",
+                        "px-5 py-12 ml-12",
+                        "px-12 py-16 ml-8 mr-8"
                     )}
                 />
             </div>
@@ -782,59 +729,59 @@ const VillageWebsite = () => {
                     src="/images/vector-asset.png"
                     alt="Background Asset"
                     className={responsiveClass(
-                        "hidden", // mobile
-                        "block absolute right-0 top-0 w-[320px] h-auto opacity-40 pointer-events-none z-10", // tablet
-                        "block absolute right-0 top-0 w-[900px] h-auto opacity-40 pointer-events-none z-10" // desktop
+                        "hidden",
+                        "block absolute right-0 top-0 w-[320px] h-auto opacity-40 pointer-events-none z-10",
+                        "block absolute right-0 top-0 w-[900px] h-auto opacity-40 pointer-events-none z-10"
                     )}
                 />
 
                 {/* Article Section */}
                 <ArticleSection
                     className={responsiveClass(
-                        "px-3 py-8 ml-0 relative z-10", // mobile
-                        "px-5 py-12 ml-12 relative z-10", // tablet
-                        "px-12 py-16 ml-8 mr-8 relative z-10" // desktop
+                        "px-3 py-8 ml-0 relative z-10",
+                        "px-5 py-12 ml-12 relative z-10",
+                        "px-12 py-16 ml-8 mr-8 relative z-10"
                     )}
                 />
 
                 {/* Info Section */}
                 <InfoSection
                     className={responsiveClass(
-                        "px-3 py-8 ml-0 relative z-10", // mobile
-                        "px-5 py-12 ml-12 relative z-10", // tablet
-                        "px-12 py-16 ml-8 mr-8 relative z-10" // desktop
+                        "px-3 py-8 ml-0 relative z-10",
+                        "px-5 py-12 ml-12 relative z-10",
+                        "px-12 py-16 ml-8 mr-8 relative z-10"
                     )}
                 />
 
                 {/* Location Section */}
                 <section
                     className={responsiveClass(
-                        "px-3 py-8 relative z-10", // mobile
-                        "px-5 py-12 relative z-10", // tablet
-                        "px-12 py-16 relative z-10" // desktop
+                        "px-3 py-8 relative z-10",
+                        "px-5 py-12 relative z-10",
+                        "px-12 py-16 relative z-10"
                     )}
                 >
                     <div
                         className={responsiveClass(
-                            "mb-6", // mobile
-                            "mb-8", // tablet
-                            "mb-10" // desktop
+                            "mb-6",
+                            "mb-8",
+                            "mb-10"
                         )}
                     >
                         <h2
                             className={responsiveClass(
-                                "text-emerald-900 text-lg font-bold font-['Montserrat'] mb-2", // mobile
-                                "text-emerald-900 text-2xl font-bold font-['Montserrat'] mb-3", // tablet
-                                "text-emerald-900 text-4xl font-bold font-['Montserrat'] mb-4" // desktop
+                                "text-emerald-900 text-lg font-bold font-['Montserrat'] mb-2",
+                                "text-emerald-900 text-2xl font-bold font-['Montserrat'] mb-3",
+                                "text-emerald-900 text-4xl font-bold font-['Montserrat'] mb-4"
                             )}
                         >
                             Peta Lokasi
                         </h2>
                         <p
                             className={responsiveClass(
-                                "text-black text-sm font-normal font-['Albert_Sans'] leading-tight", // mobile
-                                "text-black text-lg font-normal font-['Albert_Sans'] leading-relaxed", // tablet
-                                "text-black text-3xl font-normal font-['Albert_Sans'] leading-relaxed" // desktop
+                                "text-black text-sm font-normal font-['Albert_Sans'] leading-tight",
+                                "text-black text-lg font-normal font-['Albert_Sans'] leading-relaxed",
+                                "text-black text-3xl font-normal font-['Albert_Sans'] leading-relaxed"
                             )}
                         >
                             Temukan <span className="italic">katong</span> disini!
@@ -844,16 +791,16 @@ const VillageWebsite = () => {
                     {/* Map Placeholder */}
                     <div
                         className={responsiveClass(
-                            "w-full h-48 rounded-lg overflow-hidden flex items-end", // mobile
-                            "w-full h-64 rounded-lg overflow-hidden flex items-end", // tablet
-                            "w-[900px] rounded-lg overflow-hidden flex items-end" // desktop
+                            "w-full h-48 rounded-lg overflow-hidden flex items-end",
+                            "w-full h-64 rounded-lg overflow-hidden flex items-end",
+                            "w-[900px] rounded-lg overflow-hidden flex items-end"
                         )}
                         style={{ marginBottom: 0 }}
                     >
                         <img
                             src="/images/lokasi.png"
                             alt="Lokasi Ohoi Dullah"
-                            className="w-full h-full object-contain"
+                            className={twMerge("w-full h-full object-contain transition-transform duration-300", "hover:scale-105")}
                             style={{ display: "block", marginLeft: 0, marginBottom: 0 }}
                             draggable={false}
                         />
