@@ -1,29 +1,37 @@
 // src/pages/AdatDetailPage.tsx
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { twMerge } from 'tailwind-merge';
-import { ArrowLeft } from 'lucide-react';
-import { useBreakpoint, getResponsiveValue } from "../hooks/useBreakpoint";
-import { adatItems } from '../data/adatData';
-import type { AdatItem } from '../types/adat';
 import Navbar from '../components/Navbar';
 import FooterSection from '../components/FooterSection';
-
-// Helper function to create responsive classes without repetitive twMerge calls
-const getResponsiveClass = (breakpoint: string | null, mobile: string, tablet?: string, desktop?: string): string => {
-    const values = { mobile, tablet, desktop };
-    return getResponsiveValue(values, breakpoint) || mobile;
-};
+import { twMerge } from 'tailwind-merge';
+import { useBreakpoint, getResponsiveValue } from "../hooks/useBreakpoint";
+import { useParams, useNavigate } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
+import { adatItems } from '../data/adatData';
+import type { AdatItem } from '../types/adat';
 
 const AdatDetailPage: React.FC = () => {
     const { slug } = useParams<{ slug: string }>();
     const navigate = useNavigate();
     const currentBreakpoint = useBreakpoint();
-
     const [item, setItem] = useState<AdatItem | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [mainImage, setMainImage] = useState<string>('');
+
+    const responsiveClass = (
+        mobile: string,
+        tablet?: string,
+        desktop?: string
+    ) => {
+        const values = {
+            mobile,
+            tablet,
+            desktop,
+        };
+        // Perbaikan: tambahkan fallback 'mobile' jika currentBreakpoint adalah null
+        const currentBp = currentBreakpoint || 'mobile';
+        return twMerge(getResponsiveValue(values, currentBp) || mobile);
+    };
 
     useEffect(() => {
         setLoading(true);
@@ -37,9 +45,6 @@ const AdatDetailPage: React.FC = () => {
             setLoading(false);
         }
     }, [slug]);
-
-    const getResponsiveClasses = (mobile: string, tablet?: string, desktop?: string) =>
-        getResponsiveClass(currentBreakpoint, mobile, tablet, desktop);
 
     if (loading) {
         return (
@@ -81,7 +86,11 @@ const AdatDetailPage: React.FC = () => {
         <div className="min-h-screen bg-white flex flex-col relative overflow-hidden">
             <Navbar />
             <main className={twMerge(
-                getResponsiveClasses("px-4 py-8", "px-8 py-12", "px-16 py-20"),
+                responsiveClass(
+                    "px-4 py-8",
+                    "px-8 py-12",
+                    "px-16 py-20"
+                ),
                 "relative z-10 mx-auto w-full max-w-7xl"
             )}>
                 {/* Back Button */}
@@ -96,7 +105,7 @@ const AdatDetailPage: React.FC = () => {
 
                 {/* Item Header */}
                 <h1 className={twMerge(
-                    getResponsiveClasses(
+                    responsiveClass(
                         "text-3xl mb-4",
                         "text-5xl mb-6",
                         "text-6xl mb-8"
@@ -107,13 +116,7 @@ const AdatDetailPage: React.FC = () => {
                 </h1>
 
                 {/* Main Content: Image Gallery & Description */}
-                <div className={twMerge(
-                    getResponsiveClasses(
-                        "flex flex-col gap-8",
-                        "flex flex-col gap-10",
-                        "grid grid-cols-2 gap-12"
-                    )
-                )}>
+                <div className="flex flex-col gap-8 md:grid md:grid-cols-2 md:gap-12">
                     {/* Image Section */}
                     <div className="w-full flex flex-col gap-4 md:gap-5">
                         <div className="overflow-hidden rounded-3xl shadow-xl">
@@ -125,11 +128,11 @@ const AdatDetailPage: React.FC = () => {
                         </div>
                         {item.galleryImages && item.galleryImages.length > 0 && (
                             <div className={twMerge(
-                                getResponsiveClasses(
-                                    "flex gap-3 overflow-x-auto pb-2", // Mobile: scrollable horizontal gallery
+                                responsiveClass(
+                                    "flex gap-3 overflow-x-auto pb-2",
                                     "flex gap-4 md:gap-5"
                                 ),
-                                "no-scrollbar" // Hide scrollbar for a cleaner look
+                                "no-scrollbar"
                             )}>
                                 {item.galleryImages.map((img, index) => (
                                     <div
@@ -143,12 +146,10 @@ const AdatDetailPage: React.FC = () => {
                                         onClick={() => setMainImage(img)}
                                     >
                                         <img
-                                            className={twMerge(
-                                                getResponsiveClasses(
-                                                    "w-20 h-16 object-cover",
-                                                    "w-28 h-20 object-cover",
-                                                    "w-40 h-28 object-cover"
-                                                )
+                                            className={responsiveClass(
+                                                "w-20 h-16 object-cover",
+                                                "w-28 h-20 object-cover",
+                                                "w-40 h-28 object-cover"
                                             )}
                                             src={img}
                                             alt={`${item.name} gallery image ${index + 1}`}
@@ -160,7 +161,7 @@ const AdatDetailPage: React.FC = () => {
                     </div>
                     {/* Description Section */}
                     <div className="w-full font-['Albert_Sans'] text-stone-900">
-                        <p className={getResponsiveClasses(
+                        <p className={responsiveClass(
                             "text-sm leading-relaxed",
                             "text-lg leading-relaxed",
                             "text-xl leading-relaxed"
@@ -173,7 +174,7 @@ const AdatDetailPage: React.FC = () => {
                 {/* Details Section */}
                 <div className="mt-12 md:mt-16">
                     <h2 className={twMerge(
-                        getResponsiveClasses("text-xl mb-4", "text-2xl mb-6", "text-3xl mb-8"),
+                        responsiveClass("text-xl mb-4", "text-2xl mb-6", "text-3xl mb-8"),
                         "font-bold text-emerald-900 font-['Cormorant']"
                     )}>
                         Detail Informasi
