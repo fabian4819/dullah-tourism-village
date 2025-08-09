@@ -1,42 +1,36 @@
 // src/pages/AdatDetailPage.tsx
 import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { twMerge } from 'tailwind-merge';
+import { ArrowLeft } from 'lucide-react';
+import { useBreakpoint, getResponsiveValue } from "../hooks/useBreakpoint";
+import { adatItems } from '../data/adatData';
+import type { AdatItem } from '../types/adat';
 import Navbar from '../components/Navbar';
 import FooterSection from '../components/FooterSection';
-import { twMerge } from 'tailwind-merge';
-import { useBreakpoint, getResponsiveValue } from "../hooks/useBreakpoint";
-import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
-import { adatItems } from '../data/adatData'; // Import your data
-import type { AdatItem } from '../types/adat';
+
+// Helper function to create responsive classes without repetitive twMerge calls
+const getResponsiveClass = (breakpoint: string | null, mobile: string, tablet?: string, desktop?: string): string => {
+    const values = { mobile, tablet, desktop };
+    return getResponsiveValue(values, breakpoint) || mobile;
+};
 
 const AdatDetailPage: React.FC = () => {
     const { slug } = useParams<{ slug: string }>();
     const navigate = useNavigate();
     const currentBreakpoint = useBreakpoint();
+
     const [item, setItem] = useState<AdatItem | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [mainImage, setMainImage] = useState<string>('');
-
-    const responsiveClass = (
-        mobile: string,
-        tablet?: string,
-        desktop?: string
-    ) => {
-        const values = {
-            mobile,
-            tablet,
-            desktop,
-        };
-        return twMerge(getResponsiveValue(values, currentBreakpoint) || mobile);
-    };
 
     useEffect(() => {
         setLoading(true);
         const foundItem = adatItems.find(i => i.slug === slug);
         if (foundItem) {
             setItem(foundItem);
-            setMainImage(foundItem.mainImage); // Set initial main image
+            setMainImage(foundItem.mainImage);
             setLoading(false);
         } else {
             setError('Item not found');
@@ -44,12 +38,15 @@ const AdatDetailPage: React.FC = () => {
         }
     }, [slug]);
 
+    const getResponsiveClasses = (mobile: string, tablet?: string, desktop?: string) =>
+        getResponsiveClass(currentBreakpoint, mobile, tablet, desktop);
+
     if (loading) {
         return (
             <div className="min-h-screen bg-white flex flex-col">
                 <Navbar />
                 <main className="flex-grow flex items-center justify-center">
-                    <div className="text-emerald-900 text-xl">Loading item details...</div>
+                    <div className="text-emerald-900 text-xl font-['Albert_Sans']">Memuat detail item...</div>
                 </main>
                 <FooterSection />
             </div>
@@ -60,15 +57,19 @@ const AdatDetailPage: React.FC = () => {
         return (
             <div className="min-h-screen bg-white flex flex-col">
                 <Navbar />
-                <main className="flex-grow px-12 py-16 text-center">
-                    <h1 className="text-4xl font-bold text-red-500 mb-4">
+                <main className="flex-grow px-8 py-16 text-center">
+                    <h1 className="text-4xl font-bold text-red-500 mb-4 font-['Cormorant']">
                         {error || 'Item tidak ditemukan.'}
                     </h1>
+                    <p className="text-lg text-stone-700 mb-8 font-['Albert_Sans']">
+                        Mohon maaf, item yang Anda cari tidak dapat ditemukan.
+                    </p>
                     <button
                         onClick={() => navigate('/galeri-adat')}
-                        className="mt-8 px-6 py-3 bg-emerald-900 text-white rounded-lg hover:bg-emerald-800 transition-colors"
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-900 text-white rounded-lg hover:bg-emerald-800 transition-colors duration-300 font-['Albert_Sans']"
                     >
-                        Kembali ke Galeri Adat
+                        <ArrowLeft size={18} />
+                        Kembali ke Galeri
                     </button>
                 </main>
                 <FooterSection />
@@ -80,210 +81,128 @@ const AdatDetailPage: React.FC = () => {
         <div className="min-h-screen bg-white flex flex-col relative overflow-hidden">
             <Navbar />
             <main className={twMerge(
-                responsiveClass(
-                    "flex-grow px-3 py-8",
-                    "flex-grow px-5 py-12",
-                    "flex-grow px-12 py-16"
-                ),
-                "relative z-10 mx-auto max-w-[1280px]" // Added mx-auto for centering
+                getResponsiveClasses("px-4 py-8", "px-8 py-12", "px-16 py-20"),
+                "relative z-10 mx-auto w-full max-w-7xl"
             )}>
-                <div className={responsiveClass(
-                    "px-3 flex flex-col gap-5",
-                    "px-6 flex flex-col gap-5",
-                    "px-6 flex flex-col gap-5"
+                {/* Back Button */}
+                <button
+                    onClick={() => navigate(-1)}
+                    className="inline-flex items-center gap-2 text-emerald-900 font-medium hover:text-emerald-700 transition-colors mb-6 md:mb-8"
+                    aria-label="Kembali ke halaman sebelumnya"
+                >
+                    <ArrowLeft size={18} />
+                    <span className="font-['Albert_Sans'] text-base md:text-lg">Kembali</span>
+                </button>
+
+                {/* Item Header */}
+                <h1 className={twMerge(
+                    getResponsiveClasses(
+                        "text-3xl mb-4",
+                        "text-5xl mb-6",
+                        "text-6xl mb-8"
+                    ),
+                    "text-emerald-900 font-bold font-['Cormorant']"
                 )}>
-                    {/* Back Button */}
-                    <button
-                        onClick={() => navigate(-1)}
-                        className="inline-flex justify-start items-center gap-1.5 text-emerald-900 text-base font-medium font-['Albert_Sans'] leading-tight hover:text-emerald-700 transition-colors"
-                        aria-label="Kembali ke halaman sebelumnya"
-                    >
-                        <ArrowLeft className="w-4 h-4 text-emerald-900" />
-                        Kembali
-                    </button>
+                    {item.name}
+                </h1>
 
-                    {/* Item Title */}
-                    <h1 className={responsiveClass(
-                        "w-full text-emerald-900 text-3xl font-bold font-['Montserrat']",
-                        "w-full text-emerald-900 text-5xl font-bold font-['Montserrat']",
-                        "w-[1180px] text-emerald-900 text-6xl font-bold font-['Montserrat']"
-                    )}>
-                        {item.name}
-                    </h1>
-                </div>
-
+                {/* Main Content: Image Gallery & Description */}
                 <div className={twMerge(
-                    responsiveClass(
-                        "flex flex-col gap-7 mt-8",
-                        "flex flex-col gap-7 mt-8",
-                        "inline-flex justify-start items-start gap-7 mt-12 w-full"
+                    getResponsiveClasses(
+                        "flex flex-col gap-8",
+                        "flex flex-col gap-10",
+                        "grid grid-cols-2 gap-12"
                     )
                 )}>
-                    <div className={twMerge(
-                        responsiveClass(
-                            "w-full flex flex-col justify-start items-start gap-5",
-                            "w-full flex flex-col justify-start items-start gap-5",
-                            "w-[655px] flex flex-col justify-start items-start gap-5"
-                        )
-                    )}>
-                        <img
-                            className={twMerge(
-                                responsiveClass(
-                                    "w-full h-auto rounded-3xl object-cover",
-                                    "w-full h-auto rounded-[35px] object-cover",
-                                    "w-[655px] flex-1 rounded-[35px] object-cover"
-                                )
-                            )}
-                            src={mainImage}
-                            alt={item.name}
-                        />
+                    {/* Image Section */}
+                    <div className="w-full flex flex-col gap-4 md:gap-5">
+                        <div className="overflow-hidden rounded-3xl shadow-xl">
+                            <img
+                                className="w-full h-auto object-cover"
+                                src={mainImage}
+                                alt={item.name}
+                            />
+                        </div>
                         {item.galleryImages && item.galleryImages.length > 0 && (
                             <div className={twMerge(
-                                responsiveClass(
-                                    "w-full inline-flex justify-start gap-3 overflow-x-auto pb-2", // Mobile: scrollable horizontal gallery
-                                    "w-full inline-flex justify-start gap-5", // Tablet: larger gap
-                                    "w-[655px] inline-flex justify-between items-start"
-                                )
+                                getResponsiveClasses(
+                                    "flex gap-3 overflow-x-auto pb-2", // Mobile: scrollable horizontal gallery
+                                    "flex gap-4 md:gap-5"
+                                ),
+                                "no-scrollbar" // Hide scrollbar for a cleaner look
                             )}>
                                 {item.galleryImages.map((img, index) => (
-                                    <img
+                                    <div
                                         key={index}
                                         className={twMerge(
-                                            responsiveClass(
-                                                "w-24 h-16 rounded-lg object-cover cursor-pointer hover:border-2 hover:border-emerald-900 transition-all",
-                                                "w-32 h-20 rounded-xl object-cover cursor-pointer hover:border-2 hover:border-emerald-900 transition-all",
-                                                "w-52 h-32 rounded-[20px] object-cover cursor-pointer hover:border-2 hover:border-emerald-900 transition-all"
-                                            )
+                                            "relative flex-shrink-0 cursor-pointer transition-all duration-300",
+                                            "rounded-xl md:rounded-2xl overflow-hidden",
+                                            "shadow-sm hover:scale-105",
+                                            mainImage === img ? "border-2 border-emerald-900" : "opacity-75"
                                         )}
-                                        src={img}
-                                        alt={`${item.name} gallery image ${index + 1}`}
                                         onClick={() => setMainImage(img)}
-                                    />
+                                    >
+                                        <img
+                                            className={twMerge(
+                                                getResponsiveClasses(
+                                                    "w-20 h-16 object-cover",
+                                                    "w-28 h-20 object-cover",
+                                                    "w-40 h-28 object-cover"
+                                                )
+                                            )}
+                                            src={img}
+                                            alt={`${item.name} gallery image ${index + 1}`}
+                                        />
+                                    </div>
                                 ))}
                             </div>
                         )}
                     </div>
-                    <div className={twMerge(
-                        responsiveClass(
-                            "w-full text-black text-base font-normal font-['Albert_Sans'] leading-relaxed",
-                            "w-full text-black text-lg font-normal font-['Albert_Sans'] leading-relaxed",
-                            "w-[524px] text-black text-3xl font-normal font-['Albert_Sans']"
-                        )
-                    )}>
-                        {item.description}
+                    {/* Description Section */}
+                    <div className="w-full font-['Albert_Sans'] text-stone-900">
+                        <p className={getResponsiveClasses(
+                            "text-sm leading-relaxed",
+                            "text-lg leading-relaxed",
+                            "text-xl leading-relaxed"
+                        )}>
+                            {item.description}
+                        </p>
                     </div>
                 </div>
 
                 {/* Details Section */}
-                <div className="self-stretch flex flex-col justify-start items-start gap-2.5 mt-12">
-                    <div className={twMerge(
-                        responsiveClass(
-                            "self-stretch px-3 inline-flex flex-col justify-start items-start gap-1",
-                            "self-stretch px-5 inline-flex flex-col justify-start items-start gap-1",
-                            "self-stretch px-7 inline-flex justify-start items-center gap-2.5"
-                        )
+                <div className="mt-12 md:mt-16">
+                    <h2 className={twMerge(
+                        getResponsiveClasses("text-xl mb-4", "text-2xl mb-6", "text-3xl mb-8"),
+                        "font-bold text-emerald-900 font-['Cormorant']"
                     )}>
-                        <div className={responsiveClass(
-                            "w-full text-black text-lg font-bold font-['Albert_Sans']",
-                            "w-full text-black text-xl font-bold font-['Albert_Sans']",
-                            "w-52 text-black text-3xl font-bold font-['Albert_Sans']"
-                        )}>
-                            Nama
+                        Detail Informasi
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-y-6 md:gap-x-12">
+                        {/* Detail Item: Nama */}
+                        <div className="flex flex-col md:flex-row gap-1 md:gap-4">
+                            <span className="font-bold text-stone-900 text-sm md:text-base font-['Albert_Sans'] min-w-[120px]">Nama</span>
+                            <span className="text-stone-700 text-sm md:text-base font-['Albert_Sans']">: {item.name}</span>
                         </div>
-                        <div className={responsiveClass(
-                            "w-full text-black text-base font-normal font-['Albert_Sans']",
-                            "w-full text-black text-lg font-normal font-['Albert_Sans']",
-                            "w-[620px] text-black text-3xl font-normal font-['Albert_Sans']"
-                        )}>
-                            <span className="font-bold desktop:font-normal">:</span> {item.name}
+                        {/* Detail Item: Lokasi */}
+                        <div className="flex flex-col md:flex-row gap-1 md:gap-4">
+                            <span className="font-bold text-stone-900 text-sm md:text-base font-['Albert_Sans'] min-w-[120px]">Lokasi</span>
+                            <span className="text-stone-700 text-sm md:text-base font-['Albert_Sans']">: {item.location}</span>
                         </div>
-                    </div>
-                    <div className={twMerge(
-                        responsiveClass(
-                            "self-stretch px-3 inline-flex flex-col justify-start items-start gap-1",
-                            "self-stretch px-5 inline-flex flex-col justify-start items-start gap-1",
-                            "self-stretch px-7 inline-flex justify-start items-center gap-2.5"
-                        )
-                    )}>
-                        <div className={responsiveClass(
-                            "w-full text-black text-lg font-bold font-['Albert_Sans']",
-                            "w-full text-black text-xl font-bold font-['Albert_Sans']",
-                            "w-52 text-black text-3xl font-bold font-['Albert_Sans']"
-                        )}>
-                            Lokasi
+                        {/* Detail Item: Dimensi */}
+                        <div className="flex flex-col md:flex-row gap-1 md:gap-4">
+                            <span className="font-bold text-stone-900 text-sm md:text-base font-['Albert_Sans'] min-w-[120px]">Dimensi</span>
+                            <span className="text-stone-700 text-sm md:text-base font-['Albert_Sans']">: {item.dimensions}</span>
                         </div>
-                        <div className={responsiveClass(
-                            "w-full text-black text-base font-normal font-['Albert_Sans']",
-                            "w-full text-black text-lg font-normal font-['Albert_Sans']",
-                            "w-[1033px] text-black text-3xl font-normal font-['Albert_Sans']"
-                        )}>
-                            <span className="font-bold desktop:font-normal">:</span> {item.location}
+                        {/* Detail Item: Tahun */}
+                        <div className="flex flex-col md:flex-row gap-1 md:gap-4">
+                            <span className="font-bold text-stone-900 text-sm md:text-base font-['Albert_Sans'] min-w-[120px]">Tahun</span>
+                            <span className="text-stone-700 text-sm md:text-base font-['Albert_Sans']">: {item.year}</span>
                         </div>
-                    </div>
-                    <div className={twMerge(
-                        responsiveClass(
-                            "self-stretch px-3 inline-flex flex-col justify-start items-start gap-1",
-                            "self-stretch px-5 inline-flex flex-col justify-start items-start gap-1",
-                            "self-stretch px-7 inline-flex justify-start items-center gap-2.5"
-                        )
-                    )}>
-                        <div className={responsiveClass(
-                            "w-full text-black text-lg font-bold font-['Albert_Sans']",
-                            "w-full text-black text-xl font-bold font-['Albert_Sans']",
-                            "w-52 text-black text-3xl font-bold font-['Albert_Sans']"
-                        )}>
-                            Dimensi
-                        </div>
-                        <div className={responsiveClass(
-                            "w-full text-black text-base font-normal font-['Albert_Sans']",
-                            "w-full text-black text-lg font-normal font-['Albert_Sans']",
-                            "w-[1033px] text-black text-3xl font-normal font-['Albert_Sans']"
-                        )}>
-                            <span className="font-bold desktop:font-normal">:</span> {item.dimensions}
-                        </div>
-                    </div>
-                    <div className={twMerge(
-                        responsiveClass(
-                            "self-stretch px-3 inline-flex flex-col justify-start items-start gap-1",
-                            "self-stretch px-5 inline-flex flex-col justify-start items-start gap-1",
-                            "self-stretch px-7 inline-flex justify-start items-center gap-2.5"
-                        )
-                    )}>
-                        <div className={responsiveClass(
-                            "w-full text-black text-lg font-bold font-['Albert_Sans']",
-                            "w-full text-black text-xl font-bold font-['Albert_Sans']",
-                            "w-52 text-black text-3xl font-bold font-['Albert_Sans']"
-                        )}>
-                            Tahun
-                        </div>
-                        <div className={responsiveClass(
-                            "w-full text-black text-base font-normal font-['Albert_Sans']",
-                            "w-full text-black text-lg font-normal font-['Albert_Sans']",
-                            "w-[1033px] text-black text-3xl font-normal font-['Albert_Sans']"
-                        )}>
-                            <span className="font-bold desktop:font-normal">:</span> {item.year}
-                        </div>
-                    </div>
-                    <div className={twMerge(
-                        responsiveClass(
-                            "self-stretch px-3 inline-flex flex-col justify-start items-start gap-1",
-                            "self-stretch px-5 inline-flex flex-col justify-start items-start gap-1",
-                            "self-stretch px-7 inline-flex justify-start items-center gap-2.5"
-                        )
-                    )}>
-                        <div className={responsiveClass(
-                            "w-full text-black text-lg font-bold font-['Albert_Sans']",
-                            "w-full text-black text-xl font-bold font-['Albert_Sans']",
-                            "w-52 text-black text-3xl font-bold font-['Albert_Sans']"
-                        )}>
-                            Nomor Inven
-                        </div>
-                        <div className={responsiveClass(
-                            "w-full text-black text-base font-normal font-['Albert_Sans']",
-                            "w-full text-black text-lg font-normal font-['Albert_Sans']",
-                            "w-[1033px] text-black text-3xl font-normal font-['Albert_Sans']"
-                        )}>
-                            <span className="font-bold desktop:font-normal">:</span> {item.inventoryNumber}
+                        {/* Detail Item: Nomor Inven */}
+                        <div className="flex flex-col md:flex-row gap-1 md:gap-4">
+                            <span className="font-bold text-stone-900 text-sm md:text-base font-['Albert_Sans'] min-w-[120px]">Nomor Inven</span>
+                            <span className="text-stone-700 text-sm md:text-base font-['Albert_Sans']">: {item.inventoryNumber}</span>
                         </div>
                     </div>
                 </div>

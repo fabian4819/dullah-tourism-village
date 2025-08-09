@@ -380,7 +380,7 @@ const VillageWebsite = () => {
                                     "text-black text-2xl font-medium font-['Albert_Sans'] leading-relaxed" // desktop
                                 )}
                             >
-                                Selamat datang di Desa Dullah, dimana adat masih hidup dan kekuasaan dipimpin langsung oleh Raja, pusat kekuasaan adat setempat.
+                                Selamat datang di Ohoi Dullah, dimana adat masih hidup dan kekuasaan dipimpin langsung oleh Raja, pusat kekuasaan adat setempat.
                                 Di sini kamu bisa melihat langsung prosesi pengukuhan Raja Dullah, diselingi tarian tradisional seperti Cakalele, Toki Gaba‑gaba, dan Tari Sawat. 
 Bagi kamu yang tertarik dengan kebudayaan lokal yang autentik, Dullah bisa jadi pilihan utama!
                                                             </p>
