@@ -5,7 +5,7 @@ import FooterSection from '../components/FooterSection';
 import { twMerge } from 'tailwind-merge';
 import { useBreakpoint, getResponsiveValue } from "../hooks/useBreakpoint";
 import { Link } from 'react-router-dom';
-import { adatItems } from '../data/adatData'; // Import your data
+import { adatItems } from '../data/adatData';
 
 const AdatGalleryPage: React.FC = () => {
     const currentBreakpoint = useBreakpoint();
@@ -20,7 +20,6 @@ const AdatGalleryPage: React.FC = () => {
             tablet,
             desktop,
         };
-        // Perbaikan: tambahkan fallback 'mobile' jika currentBreakpoint adalah null
         const currentBp = currentBreakpoint || 'mobile';
         return twMerge(getResponsiveValue(values, currentBp) || mobile);
     };
@@ -30,32 +29,37 @@ const AdatGalleryPage: React.FC = () => {
             <Navbar />
             <main className={twMerge(
                 responsiveClass(
-                    "flex-grow px-3 py-8",
-                    "flex-grow px-5 py-12",
-                    "flex-grow px-12 py-16"
+                    "flex-grow px-4 py-8",
+                    "flex-grow px-8 py-12",
+                    "flex-grow px-16 py-20"
                 ),
-                "relative z-10 mx-auto"
+                "relative z-10 mx-auto w-full max-w-7xl"
             )}>
                 {/* Header Section */}
                 <div className={twMerge(
                     responsiveClass(
-                        "w-full flex flex-col justify-start items-center gap-3.5 mb-12",
-                        "w-full flex flex-col justify-start items-center gap-3.5 mb-14",
-                        "w-[1180px] flex flex-col justify-start items-center gap-3.5 mb-16"
-                    ),
-                    "mx-auto"
+                        "mb-10 text-center",
+                        "mb-12 text-center",
+                        "mb-16 text-center max-w-[1056px] mx-auto"
+                    )
                 )}>
-                    <h1 className={responsiveClass(
-                        "text-emerald-900 text-3xl font-normal text-center font-['Cormorant']",
-                        "text-emerald-900 text-5xl font-normal text-center font-['Cormorant']",
-                        "text-emerald-900 text-6xl font-normal text-center font-['Cormorant']"
+                    <h1 className={twMerge(
+                        responsiveClass(
+                            "text-3xl",
+                            "text-5xl",
+                            "text-6xl"
+                        ),
+                        "text-emerald-900 font-['Cormorant'] font-normal"
                     )}>
                         Galeri Adat
                     </h1>
-                    <p className={responsiveClass(
-                        "w-full text-center text-black text-sm font-normal font-['Albert_Sans'] leading-tight",
-                        "w-full text-center text-black text-lg font-normal font-['Albert_Sans'] leading-relaxed",
-                        "w-[1056px] text-center text-black text-3xl font-normal font-['Albert_Sans'] leading-relaxed"
+                    <p className={twMerge(
+                        responsiveClass(
+                            "text-sm leading-tight mt-3",
+                            "text-lg leading-relaxed mt-4",
+                            "text-3xl leading-relaxed mt-6"
+                        ),
+                        "text-stone-700 font-['Albert_Sans'] font-normal"
                     )}>
                         Budaya Tual punya keunikan yang sulit ditemukan di tempat lain. Melalui galeri adat ini, Anda bisa melihat sendiri kekayaan tradisi yang masih terjaga hingga kini.
                     </p>
@@ -65,55 +69,47 @@ const AdatGalleryPage: React.FC = () => {
                 <div className={twMerge(
                     responsiveClass(
                         "grid grid-cols-1 gap-6",
-                        "grid grid-cols-2 gap-7",
-                        "grid grid-cols-3 gap-7"
+                        "grid grid-cols-2 gap-8",
+                        "grid grid-cols-3 gap-10"
                     ),
-                    "w-full max-w-[1180px] mx-auto"
+                    "mx-auto"
                 )}>
                     {adatItems.map((item) => (
                         <Link
                             to={`/galeri-adat/${item.slug}`}
                             key={item.slug}
                             className={twMerge(
-                                responsiveClass(
-                                    "w-full bg-white rounded-xl outline outline-1 outline-neutral-700/50 flex flex-col overflow-hidden",
-                                    "w-full bg-white rounded-2xl outline outline-1 outline-neutral-700/50 flex flex-col overflow-hidden",
-                                    "w-96 bg-white rounded-[20px] outline outline-1 outline-emerald-900 flex flex-col overflow-hidden"
-                                ),
-                                "shadow-[0_4px_9px_0_rgba(0,0,0,0.10),0_16px_16px_0_rgba(0,0,0,0.09),0_35px_21px_0_rgba(0,0,0,0.05),0_63px_25px_0_rgba(0,0,0,0.01),0_98px_27px_0_rgba(0,0,0,0.00)] hover:shadow-lg transition-shadow"
+                                "w-full bg-white rounded-[20px] shadow-md outline outline-1 outline-neutral-700/50 flex flex-col overflow-hidden",
+                                "transition-all duration-300 ease-in-out hover:shadow-xl hover:outline-emerald-900 transform hover:-translate-y-1"
                             )}
                         >
                             <img
-                                className={responsiveClass(
-                                    "w-full h-40 object-cover rounded-t-xl",
-                                    "w-full h-48 object-cover rounded-t-2xl",
-                                    "self-stretch h-60 rounded-tl-[10px] rounded-tr-[10px] object-cover"
+                                className={twMerge(
+                                    responsiveClass(
+                                        "w-full h-48",
+                                        "w-full h-56",
+                                        "w-full h-64"
+                                    ),
+                                    "object-cover rounded-t-[18px]"
                                 )}
                                 src={item.mainImage}
                                 alt={item.name}
                             />
-                            <div className={twMerge(
-                                responsiveClass(
-                                    "p-4 flex flex-col gap-2",
-                                    "p-5 flex flex-col gap-2",
-                                    "px-5 py-6 flex flex-col gap-2"
-                                ),
-                                "flex-grow"
-                            )}>
-                                <h3 className={twMerge(
-                                    responsiveClass(
-                                        "text-stone-900 text-lg font-semibold font-['Albert_Sans'] leading-tight",
-                                        "text-stone-900 text-xl font-semibold font-['Albert_Sans'] leading-snug",
-                                        "text-stone-900 text-2xl font-semibold font-['Albert_Sans']"
-                                    ),
-                                    "min-h-[3.5rem]"
+                            <div className="p-6 flex flex-col gap-2 flex-grow">
+                                <h3 className={responsiveClass(
+                                    "text-stone-900 text-lg font-semibold font-['Albert_Sans'] leading-tight",
+                                    "text-stone-900 text-xl font-semibold font-['Albert_Sans'] leading-snug",
+                                    "text-stone-900 text-2xl font-semibold font-['Albert_Sans'] leading-snug"
                                 )}>
                                     {item.name}
                                 </h3>
-                                <div className={responsiveClass(
-                                    "w-full text-stone-900 text-xs font-normal font-['Albert_Sans']",
-                                    "w-full text-stone-900 text-sm font-normal font-['Albert_Sans']",
-                                    "w-80 h-4 text-stone-900 text-base font-normal font-['Albert_Sans']"
+                                <div className={twMerge(
+                                    responsiveClass(
+                                        "text-stone-900 text-xs font-normal font-['Albert_Sans']",
+                                        "text-stone-900 text-sm font-normal font-['Albert_Sans']",
+                                        "text-stone-900 text-base font-normal font-['Albert_Sans']"
+                                    ),
+                                    "flex-1" // Memastikan tulisan tidak terpotong
                                 )}>
                                     {item.location}
                                 </div>
